@@ -4313,3 +4313,18 @@ java.io.FileNotFoundException: /org/eclipse/persistence/jaxb/eclipselink_oxm_2_5
 
 !ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-12-01 14:42:43.301
 !MESSAGE executing callback sts4.classpath.lpfDdGZj SUCCESS [done]
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-12-01 14:53:51.439
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.lpfDdGZj
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-12-01 14:53:51.449
+!MESSAGE unsubscribing from classpath changes: sts4.classpath.lpfDdGZj
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-12-01 14:53:51.462
+!MESSAGE subsribers = {}
+
+!ENTRY org.springframework.tooling.ls.eclipse.commons 1 0 2022-12-01 14:53:51.472
+!MESSAGE ClasspathListenerHandler removeClasspathListener sts4.classpath.lpfDdGZj => OK
+
+!ENTRY org.eclipse.ui 2 2 2022-12-01 14:53:52.015
+!MESSAGE Invalid property category path: org.springframework.ide.eclipse.beans.ui.properties.ProjectPropertyPage (bundle: org.springframework.ide.eclipse.xml.namespaces, propertyPage: org.springframework.ide.eclipse.beans.ui.namespaces.projectPropertyPage)

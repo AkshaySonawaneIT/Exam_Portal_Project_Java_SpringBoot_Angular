@@ -1,0 +1,32 @@
+<div class="bootstrap-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="container text-center">
+                    <img src="../../../assets/auth/registerlogo.png" alt="register.logo" width="150px" height="150px">
+                </div>
+                <h3 class="text-center">Login Here !!!</h3>
+                <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+                    <!-- Email -->
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input formControlName="email" type="email" matInput placeholder="Enter Email Id Here..">
+                    </mat-form-field>
+
+                    <!-- Password -->
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Password</mat-label>
+                        <input type="password" formControlName="password" matInput placeholder="Enter Password Here..">
+                    </mat-form-field>
+
+                    <div class="container text-center">
+                        <button type="submit" mat-raised-button color="primary"
+                            [disabled]="!loginForm.valid">Login</button>
+                        <button type="button" mat-raised-button color="accent" class="btn"
+                            (click)="onClickReset()">Clear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

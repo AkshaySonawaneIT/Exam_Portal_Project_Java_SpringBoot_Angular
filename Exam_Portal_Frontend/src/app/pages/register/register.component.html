@@ -1,0 +1,60 @@
+<div class="bootstrap-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="container text-center">
+                    <img src="../../../assets/auth/registerlogo.png" alt="register.logo" width="150px" height="150px">
+                </div>
+                <h3 class="text-center">Register Here !!!</h3>
+
+                <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
+                    <!-- Full Name -->
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Full Name</mat-label>
+                        <input formControlName="name"
+                        matInput placeholder="Enter First and Last Name..">
+                        <mat-hint><span *ngIf="nameValidator && !nameValidator.valid && nameValidator.touched"
+                            style="color: red; margin-left: 20px;">Name is required</span><br></mat-hint>
+                        <!-- <mat-hint>Hint</mat-hint> [(ngModel)]="user.name" name="name"-->
+                    </mat-form-field>
+
+                    <!-- Email -->
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input formControlName="email"
+                        type="email" matInput placeholder="Enter Valid Email Id..">
+                        <mat-hint><span *ngIf="emailValidator && !emailValidator.valid && emailValidator.touched"
+                            style="color: red; margin-left: 20px;">Email is not valid</span></mat-hint>
+                        <!-- <mat-hint>Hint</mat-hint> [(ngModel)]="user.email" name="email"-->
+                    </mat-form-field>
+
+                    <!-- Phone Number -->
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Contact Number</mat-label>
+                        <input formControlName="contactNumber"
+                        type="text" matInput placeholder="Enter Valid Contact Number..">
+                        <mat-hint><span
+                            *ngIf="phoneNumberValidator && !phoneNumberValidator.valid && phoneNumberValidator.touched"
+                            style="color: red; margin-left: 20px;">Contact number is not valid</span><br></mat-hint>
+                        <!-- <mat-hint>Hint</mat-hint> [(ngModel)]="user.contactNumber" name="contactNumber"-->
+                    </mat-form-field>
+
+                    <!-- Password -->
+                    <mat-form-field class="full-width" appearance="fill">
+                        <mat-label>Password</mat-label>
+                        <input type="password" formControlName="password"
+                        matInput placeholder="Enter Valid Password..">
+                        <mat-hint><span *ngIf="passwordValidator && !passwordValidator.valid && passwordValidator.touched"
+                            style="color: red; margin-left: 20px;">Password should be greater than 8 characters.</span><br></mat-hint>
+                        <!-- <mat-hint>Hint</mat-hint> [(ngModel)]="user.password" name="password"-->
+                    </mat-form-field>
+
+                    <div class="container text-center">
+                        <button type="submit" mat-raised-button color="primary" [disabled]="!registerForm.valid">Register</button>
+                        <button type="button" mat-raised-button color="accent" class="btn" (click)="onClickReset()">Clear</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
