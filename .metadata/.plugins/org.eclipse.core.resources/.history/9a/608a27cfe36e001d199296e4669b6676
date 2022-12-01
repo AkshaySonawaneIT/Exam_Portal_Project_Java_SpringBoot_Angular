@@ -1,0 +1,5 @@
+package com.examportal.servicesImpl;
+
+public class UserServiceImpl {
+
+}

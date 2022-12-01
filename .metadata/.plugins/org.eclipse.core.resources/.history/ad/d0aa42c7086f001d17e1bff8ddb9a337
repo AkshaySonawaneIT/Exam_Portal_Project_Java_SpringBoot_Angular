@@ -1,0 +1,9 @@
+package com.examportal.POJO;
+
+@Entity
+@DynamicInsert
+@DynamicUpdate
+@Table(name = "user")
+public class User {
+
+}

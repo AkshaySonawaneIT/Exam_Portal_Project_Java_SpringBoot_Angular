@@ -1,0 +1,5 @@
+package com.examportal.models;
+
+public class Role {
+
+}

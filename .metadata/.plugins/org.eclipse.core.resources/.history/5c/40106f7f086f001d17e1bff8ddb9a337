@@ -1,0 +1,5 @@
+package com.examportal.POJO;
+
+public class User {
+
+}

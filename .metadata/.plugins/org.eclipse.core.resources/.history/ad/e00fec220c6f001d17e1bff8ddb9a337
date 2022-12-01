@@ -1,0 +1,17 @@
+package com.examportal.restImpl;
+
+import java.util.Map;
+
+import org.springframework.http.ResponseEntity;
+
+import com.examportal.rest.UserRest;
+
+public class UserRestImpl implements UserRest{
+
+	@Override
+	public ResponseEntity<String> register(Map<String, String> requestMap) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,25 @@
+package com.examportal.restImpl;
+
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import com.examportal.constants.ExamPortalConstants;
+import com.examportal.rest.UserRest;
+import com.examportal.utils.ExamPortalUtils;
+
+public class UserRestImpl implements UserRest{
+
+	@Override
+	public ResponseEntity<String> registerUser(Map<String, String> requestMap) {
+		try {
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return ExamPortalUtils.getResponseEntity(ExamPortalConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+}

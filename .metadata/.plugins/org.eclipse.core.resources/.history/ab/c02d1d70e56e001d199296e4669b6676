@@ -1,0 +1,10 @@
+package com.examportal.rest;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RequestMapping("/user")
+public interface UserRest {
+
+	@PostMapping(path = "/register")
+}

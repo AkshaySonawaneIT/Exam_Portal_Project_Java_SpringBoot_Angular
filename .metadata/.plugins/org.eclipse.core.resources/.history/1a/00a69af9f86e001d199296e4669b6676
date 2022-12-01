@@ -1,0 +1,5 @@
+package com.examportal.Repository;
+
+public interface UserRepository {
+
+}

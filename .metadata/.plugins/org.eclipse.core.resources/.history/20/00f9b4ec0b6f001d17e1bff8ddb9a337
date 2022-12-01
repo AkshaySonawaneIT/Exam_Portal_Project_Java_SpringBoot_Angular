@@ -1,0 +1,5 @@
+package com.examportal.rest;
+
+public interface UserRest {
+
+}

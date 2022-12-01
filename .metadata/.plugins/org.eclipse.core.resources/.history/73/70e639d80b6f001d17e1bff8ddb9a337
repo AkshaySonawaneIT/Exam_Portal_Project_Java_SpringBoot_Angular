@@ -1,0 +1,5 @@
+package com.examportal.Dao;
+
+public interface UserDao {
+
+}

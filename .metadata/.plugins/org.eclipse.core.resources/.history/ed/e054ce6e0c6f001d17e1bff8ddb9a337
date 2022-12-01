@@ -1,0 +1,10 @@
+package com.examportal.serviceImpl;
+
+import org.springframework.stereotype.Service;
+
+import com.examportal.service.UserService;
+
+@Service
+public class UserServiceImpl implements UserService{
+
+}

@@ -1,0 +1,11 @@
+package com.examportal.rest;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RequestMapping(path = "/user")
+public interface UserRest {
+
+	@PostMapping(path = "/register")
+	public ResponseEntity<String> register(@RequestBody(required = true) Map<String, String> requestMap);
+}

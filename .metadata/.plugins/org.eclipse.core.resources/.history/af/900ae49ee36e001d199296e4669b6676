@@ -1,0 +1,5 @@
+package com.examportal;
+
+public interface UserService {
+
+}

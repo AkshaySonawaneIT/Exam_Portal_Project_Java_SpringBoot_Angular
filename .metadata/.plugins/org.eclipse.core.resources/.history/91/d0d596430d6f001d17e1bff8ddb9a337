@@ -1,0 +1,10 @@
+package com.examportal.Dao;
+
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.examportal.POJO.User;
+
+public interface UserDao extends JpaRepository<User, Integer>{
+
+}

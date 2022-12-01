@@ -1,0 +1,11 @@
+package com.examportal.rest;
+
+import java.util.Map;
+
+
+@RequestMapping(path = "/user")
+public interface UserRest {
+
+	@PostMapping(path = "/register")
+	public ResponseEntity<String> register(@RequestBody(required = true) Map<String, String> requestMap);
+}

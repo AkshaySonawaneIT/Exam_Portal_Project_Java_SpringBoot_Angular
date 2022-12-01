@@ -1,0 +1,7 @@
+package com.examportal.serviceImpl;
+
+import com.examportal.service.UserService;
+
+public class UserServiceImpl implements UserService{
+
+}

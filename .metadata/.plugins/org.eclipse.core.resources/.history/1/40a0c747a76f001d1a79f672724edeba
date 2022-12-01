@@ -1,0 +1,5 @@
+package com.examportal.emailServices;
+
+public class EmailService {
+
+}

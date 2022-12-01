@@ -1,0 +1,27 @@
+package com.examportal.serviceImpl;
+
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.examportal.constants.ExamPortalConstants;
+import com.examportal.service.UserService;
+import com.examportal.utils.ExamPortalUtils;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Override
+	public ResponseEntity<String> registerUser(Map<String, String> requestMap) {
+		try {
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ExamPortalUtils.getResponseEntity(ExamPortalConstants.SOMETHING_WENT_WRONG,
+				HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+}

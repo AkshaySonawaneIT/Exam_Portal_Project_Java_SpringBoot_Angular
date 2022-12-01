@@ -1,0 +1,27 @@
+package com.examportal.servicesImpl;
+
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.examportal.Repository.RoleRepository;
+import com.examportal.Repository.UserRepository;
+import com.examportal.models.User;
+import com.examportal.models.UserRole;
+import com.examportal.services.UserService;
+
+public class UserServiceImpl implements UserService{
+
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	RoleRepository repository;
+	
+	
+	@Override
+	public User createUser(User user, Set<UserRole> userRoles) {
+		this.userRepository.findByUserName()
+	}
+
+}

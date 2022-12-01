@@ -1,0 +1,12 @@
+package com.examportal.services;
+
+import java.util.Set;
+
+import com.examportal.models.User;
+import com.examportal.models.UserRole;
+
+public interface UserService {
+
+	//Creatign User
+	public User createUser(User user, Set<UserRole> userRoles);
+}

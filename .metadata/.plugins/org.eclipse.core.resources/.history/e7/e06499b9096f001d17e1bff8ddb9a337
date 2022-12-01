@@ -1,0 +1,15 @@
+package com.examportal.POJO;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
+@Entity
+@DynamicInsert
+@DynamicUpdate
+@Table(name = "users")
+public class User {
+
+}

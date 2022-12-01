@@ -1,0 +1,103 @@
+package com.examportal.serviceImpl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.examportal.Dao.UserDao;
+import com.examportal.POJO.User;
+import com.examportal.constants.ExamPortalConstants;
+import com.examportal.emailServices.EmailService;
+import com.examportal.service.UserService;
+import com.examportal.utils.ExamPortalUtils;
+
+@Service
+public class UserServiceImpl implements UserService {
+
+	@Autowired
+	UserDao userDao;
+	
+	@Autowired
+	EmailService emailService;
+
+	@Override
+	public ResponseEntity<String> register(Map<String, String> requestMap) {
+		System.out.println("Inside register UserServiceImpl"+requestMap);
+		try {
+			if (validateRegisterMap(requestMap)) {
+				User user = userDao.findByEmailId(requestMap.get("email"));
+				if (Objects.isNull(user)) {
+					userDao.save(getUserFromMap(requestMap));
+					emailService.registrationEmail(requestMap.get("email"));
+					return ExamPortalUtils.getResponseEntity("User registered successfully", HttpStatus.OK);
+				} else {
+					return ExamPortalUtils.getResponseEntity("Email is already exists", HttpStatus.BAD_REQUEST);
+				}
+			} else {
+				return ExamPortalUtils.getResponseEntity(ExamPortalConstants.INVALID_DATA, HttpStatus.BAD_REQUEST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ExamPortalUtils.getResponseEntity(ExamPortalConstants.SOMETHING_WENT_WRONG,
+				HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	private boolean validateRegisterMap(Map<String,String> requestMap) {
+		if(requestMap.containsKey("name") && requestMap.containsKey("contactNumber") && requestMap.containsKey("email") && requestMap.containsKey("password")) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	private User getUserFromMap(Map<String,String> requMap) {
+		User user = new User();
+		user.setName(requMap.get("name"));
+		user.setContactNumber(requMap.get("contactNumber"));
+		user.setEmail(requMap.get("email"));
+		user.setPassword(requMap.get("password"));
+		user.setStatus("true");
+		user.setRole("user");
+		user.setProfile("default.png");
+		user.setDeleted("false");
+		return user;
+	}
+
+	@Override
+	public ResponseEntity<List<User>> getAllUser() {
+		try {
+			return new ResponseEntity<>(userDao.getAllUser(), HttpStatus.OK);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<List<User>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<User> getUserByEmail(String email) {
+		try {
+			User userObj = userDao.findByEmail(email);
+			if(!userObj.equals(null)) {
+				return userObj;
+			}
+			else {
+				return null;
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+}

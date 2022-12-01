@@ -1,0 +1,15 @@
+package com.examportal.servicesImpl;
+
+import java.util.Set;
+
+import com.examportal.models.User;
+import com.examportal.models.UserRole;
+import com.examportal.services.UserService;
+
+public class UserServiceImpl implements UserService{
+
+	@Override
+	public User createUser(User user, Set<UserRole> userRoles) {
+	}
+
+}

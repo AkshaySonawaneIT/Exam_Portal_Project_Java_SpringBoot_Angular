@@ -1,0 +1,11 @@
+package com.examportal.restImpl;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import com.examportal.rest.UserRest;
+
+@RestController
+public class UserRestImpl implements UserRest{
+
+	
+}
