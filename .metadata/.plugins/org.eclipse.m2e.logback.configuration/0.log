@@ -3050,3 +3050,12 @@ java.io.FileNotFoundException: C:\Users\Akshay.Sonawane\.m2\repository\org\apach
 2022-12-01 09:56:49,245 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
 2022-12-01 09:56:49,256 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
 2022-12-01 09:56:49,257 [Worker-63: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Akshay.Sonawane\Desktop\Akshay Projects\Exam Portal Project(Spring Boot and Angular) Durgesh\Exam_Portal_Backend\src\test\resources
+2022-12-01 14:41:53,079 [Worker-5: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2022-12-01 14:42:38,013 [Worker-6: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.examportal:examportal:0.0.1-SNAPSHOT @ C:\Users\Akshay.Sonawane\Desktop\Akshay Projects\Exam Portal Project(Spring Boot and Angular) Durgesh\Exam_Portal_Backend\pom.xml.
+2022-12-01 14:42:45,140 [Worker-6: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2022-12-01 14:42:45,180 [Worker-6: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2022-12-01 14:42:45,184 [Worker-6: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Akshay.Sonawane\Desktop\Akshay Projects\Exam Portal Project(Spring Boot and Angular) Durgesh\Exam_Portal_Backend\src\test\resources
+2022-12-01 14:43:10,054 [Worker-6: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource
+2022-12-01 14:43:10,075 [Worker-6: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource
+2022-12-01 14:43:10,077 [Worker-6: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\Akshay.Sonawane\Desktop\Akshay Projects\Exam Portal Project(Spring Boot and Angular) Durgesh\Exam_Portal_Backend\src\test\resources
+2022-12-01 14:43:33,646 [Worker-8: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource

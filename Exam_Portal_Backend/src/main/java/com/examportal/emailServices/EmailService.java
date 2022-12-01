@@ -15,7 +15,7 @@ public class EmailService {
 	public void registrationEmail(String to) {
 		System.out.println("Inside registrationEmail method");
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("sonaak249@gmail.com");
+		message.setFrom("yourmail");
 		message.setTo(to);
 		String subject = "Registration Successful....";
 		String text = "Hi, \n Thanks for registering with us.\n Exam Portal Project(Akshay Sonawane)";
