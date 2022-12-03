@@ -4,14 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.examportal.Dao.UserDao;
+import com.examportal.JWT.JwtUtil;
+import com.examportal.JWT.StudentUserDetailsService;
 import com.examportal.POJO.User;
 import com.examportal.constants.ExamPortalConstants;
 import com.examportal.emailServices.EmailService;
@@ -23,15 +27,24 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserDao userDao;
-	
+
 	@Autowired
 	EmailService emailService;
+	
+	@Autowired
+	StudentUserDetailsService service;
+	
+	@Autowired
+	AuthenticationManager authenticationManager;
+	
+	@Autowired
+	JwtUtil jwtUtil;
 
 	@Override
 	public ResponseEntity<String> register(Map<String, String> requestMap) {
-		System.out.println("Inside register UserServiceImpl"+requestMap);
+		System.out.println("Inside register UserServiceImpl" + requestMap);
 		try {
-			if (validateRegisterMap(requestMap) && requestMap.get("email")!=null) {
+			if (validateRegisterMap(requestMap) && requestMap.get("email") != null) {
 				User user = userDao.findByEmailId(requestMap.get("email"));
 				if (Objects.isNull(user)) {
 					userDao.save(getUserFromMap(requestMap));
@@ -49,17 +62,17 @@ public class UserServiceImpl implements UserService {
 		return ExamPortalUtils.getResponseEntity(ExamPortalConstants.SOMETHING_WENT_WRONG,
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
-	private boolean validateRegisterMap(Map<String,String> requestMap) {
-		if(requestMap.containsKey("name") && requestMap.containsKey("contactNumber") && requestMap.containsKey("email") && requestMap.containsKey("password")) {
+
+	private boolean validateRegisterMap(Map<String, String> requestMap) {
+		if (requestMap.containsKey("name") && requestMap.containsKey("contactNumber") && requestMap.containsKey("email")
+				&& requestMap.containsKey("password")) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-	
-	private User getUserFromMap(Map<String,String> requMap) {
+
+	private User getUserFromMap(Map<String, String> requMap) {
 		User user = new User();
 		user.setName(requMap.get("name"));
 		user.setContactNumber(requMap.get("contactNumber"));
@@ -77,8 +90,7 @@ public class UserServiceImpl implements UserService {
 		System.out.println("Inside getAllUser");
 		try {
 			return new ResponseEntity<>(userDao.getAllUser(), HttpStatus.OK);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return new ResponseEntity<List<User>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -89,14 +101,12 @@ public class UserServiceImpl implements UserService {
 		System.out.println("Inside getUserByEmail");
 		try {
 			User userObj = userDao.findByEmail(email);
-			if(!Objects.isNull(userObj)) {
+			if (!Objects.isNull(userObj)) {
 				return new ResponseEntity<User>(userObj, HttpStatus.OK);
-			}
-			else {
+			} else {
 				return null;
 			}
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return null;
@@ -107,19 +117,38 @@ public class UserServiceImpl implements UserService {
 		System.out.println("Inside deleteUserByEmail");
 		try {
 			User userObj = userDao.findByEmail(email);
-			if(!Objects.isNull(userObj)) {
+			if (!Objects.isNull(userObj)) {
 				userDao.deleteById(userObj.getId());
 				return ExamPortalUtils.getResponseEntity("User Deleted Successfully", HttpStatus.OK);
+			} else {
+				return ExamPortalUtils.getResponseEntity("User not found with this email : " + email, HttpStatus.OK);
 			}
-			else {
-				return ExamPortalUtils.getResponseEntity("User not found with this email : "+email, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ExamPortalUtils.getResponseEntity(ExamPortalConstants.SOMETHING_WENT_WRONG,
+				HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@Override
+	public ResponseEntity<String> login(Map<String, String> requestMap) {
+		System.out.println("Inside login method...");
+		try {
+			Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(requestMap.get("email"), requestMap.get("password")));
+			
+			if(auth.isAuthenticated()) {
+				if(service.getUserDetails().getStatus().equalsIgnoreCase("true")) {
+					return new ResponseEntity<String>("\"token\":\""+jwtUtil.generateToken(service.getUserDetails().getEmail(), service.getUserDetails().getRole() + ""), HttpStatus.OK);
+				}
+				else {
+					return new ResponseEntity<String>("{\"message\":\""+"Wait for admin approval."+"\"}", HttpStatus.BAD_REQUEST);
+				}
 			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		return ExamPortalUtils.getResponseEntity(ExamPortalConstants.SOMETHING_WENT_WRONG,
-				HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<String>("{\"message\":\""+"Bad Credentials."+"\"}", HttpStatus.BAD_REQUEST);
 	}
 
 }

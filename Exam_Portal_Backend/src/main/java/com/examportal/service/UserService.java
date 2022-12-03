@@ -10,6 +10,7 @@ import com.examportal.POJO.User;
 public interface UserService {
 
 	ResponseEntity<String> register(Map<String, String> requestMap);
+	ResponseEntity<String> login(Map<String, String> requestMap);
 	ResponseEntity<List<User>> getAllUser();
 	ResponseEntity<User> getUserByEmail(String email);
 	ResponseEntity<String> deleteUserByEmail(String email);
