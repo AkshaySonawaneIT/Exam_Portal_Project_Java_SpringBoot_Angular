@@ -23,6 +23,7 @@ public class StudentUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		userDetail = userDao.findByEmailId(username);
+		System.out.println("User Detail : "+userDetail.getEmail());
 		if (!Objects.isNull(userDetail)) {
 			return new User(userDetail.getEmail(), userDetail.getPassword(), new ArrayList<>());
 		} else {

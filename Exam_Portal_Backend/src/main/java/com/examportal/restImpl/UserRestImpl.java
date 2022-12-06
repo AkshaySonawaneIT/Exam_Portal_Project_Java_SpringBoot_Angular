@@ -45,6 +45,7 @@ public class UserRestImpl implements UserRest{
 
 	@Override
 	public ResponseEntity<User> getUserByEmail(String email) {
+		System.out.println("Inside getUserByEmail RestImpl...");
 		try {
 			return userService.getUserByEmail(email);
 		}

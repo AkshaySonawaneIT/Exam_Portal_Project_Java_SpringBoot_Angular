@@ -132,15 +132,20 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public ResponseEntity<String> login(Map<String, String> requestMap) {
-		System.out.println("Inside login method...");
+		System.out.println("Inside login method..."+requestMap);
 		try {
 			Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(requestMap.get("email"), requestMap.get("password")));
 			
 			if(auth.isAuthenticated()) {
+				System.out.println("Inside isAuthenticated...");
 				if(service.getUserDetails().getStatus().equalsIgnoreCase("true")) {
-					return new ResponseEntity<String>("\"token\":\""+jwtUtil.generateToken(service.getUserDetails().getEmail(), service.getUserDetails().getRole() + ""), HttpStatus.OK);
+					System.out.println("Inside if login...");
+					String token = jwtUtil.generateToken(service.getUserDetails().getEmail(), service.getUserDetails().getRole());
+					System.out.println("Token : "+token);
+					return new ResponseEntity<String>(token, HttpStatus.OK);
 				}
 				else {
+					System.out.println("Inside else login...");
 					return new ResponseEntity<String>("{\"message\":\""+"Wait for admin approval."+"\"}", HttpStatus.BAD_REQUEST);
 				}
 			}
@@ -148,7 +153,8 @@ public class UserServiceImpl implements UserService {
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		return new ResponseEntity<String>("{\"message\":\""+"Bad Credentials."+"\"}", HttpStatus.BAD_REQUEST);
+		String msg = "Bad Credentials";
+		return new ResponseEntity<String>(msg, HttpStatus.BAD_REQUEST);
 	}
 
 }

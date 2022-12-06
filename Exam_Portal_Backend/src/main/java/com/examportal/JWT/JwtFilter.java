@@ -13,11 +13,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import io.jsonwebtoken.Claims;
 
 @Component
+@CrossOrigin("*")
 public class JwtFilter extends OncePerRequestFilter{
 
 	@Autowired
@@ -42,13 +44,18 @@ public class JwtFilter extends OncePerRequestFilter{
 			
 			if(autorizationHeader!=null && autorizationHeader.startsWith("Bearer ")) {
 				token = autorizationHeader.substring(7);
+				System.out.println("JwtFilter Token: "+token);
 				userName = jwtUtil.extractUsername(token);
+				System.out.println("JwtFilter Username: "+userName);
 				claim = jwtUtil.extractAllClaims(token);
+				System.out.println("JwtFilter Claim: "+claim);
 			}
 			
 			if(userName!=null && SecurityContextHolder.getContext().getAuthentication()==null) {
 				UserDetails userDetails = service.loadUserByUsername(userName);
+				System.out.println("JwtFilter UserDetails:"+userDetails);
 				if(jwtUtil.validateToken(token, userDetails)) {
+					System.out.println("JwtFilter if: ");
 					UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 					usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
 					SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);

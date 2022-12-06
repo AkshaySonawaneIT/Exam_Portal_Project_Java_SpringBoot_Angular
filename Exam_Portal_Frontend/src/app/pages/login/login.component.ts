@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class LoginComponent {
 
-  constructor(private authService : AuthServiceService, private snack : MatSnackBar){}
+  constructor(private service : AuthServiceService, private snack : MatSnackBar){}
 
   ngOnInit(): void {}
   
@@ -21,8 +21,39 @@ export class LoginComponent {
   });
 
   loginUser(){
+    console.log("Log In : ");
     console.log(this.loginForm.value);
+    
+    this.service.loginUserAPI(this.loginForm.value).subscribe(
+      (result:any)=>{
+        console.log("Success : ")
+        console.log(result);
+        this.service.setTokenInLocalStorage(result);
+        Swal.fire("Login Successful..");
+        this.getCurrentUserDetails();
+      },
+      (error:any)=>{
+        console.log("Error : ")
+        console.log(error);
+        Swal.fire(error.error);
+      }
+    )
   }
+
+  getCurrentUserDetails(){
+    console.log("Inside getCurrentUserDetails : ");
+    this.service.getCurrentUser(this.loginForm.value.email).subscribe(
+      (result:any)=>{
+        console.log("Success...");
+        console.log(result);
+      },
+      (error:any)=>{
+        console.log("Error...");
+        console.log(error);
+      }
+    )
+  }
+
 
   onClickReset(){
     this.loginForm.reset();

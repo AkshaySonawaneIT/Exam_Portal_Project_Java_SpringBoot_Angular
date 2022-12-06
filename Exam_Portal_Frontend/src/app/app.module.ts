@@ -12,12 +12,14 @@ import { FooterComponent } from './components/footer/footer.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HomeComponent } from './pages/home/home.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthInterceptor } from './services/auth-interceptor';
+// import { authInterceptorProviders } from './services/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,11 @@ import { MatIconModule } from '@angular/material/icon';
     MatToolbarModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
