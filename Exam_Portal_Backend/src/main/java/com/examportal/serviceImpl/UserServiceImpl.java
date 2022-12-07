@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.examportal.Dao.UserDao;
@@ -39,6 +40,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	JwtUtil jwtUtil;
+	
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
 	public ResponseEntity<String> register(Map<String, String> requestMap) {
@@ -77,7 +81,7 @@ public class UserServiceImpl implements UserService {
 		user.setName(requMap.get("name"));
 		user.setContactNumber(requMap.get("contactNumber"));
 		user.setEmail(requMap.get("email"));
-		user.setPassword(requMap.get("password"));
+		user.setPassword(bCryptPasswordEncoder.encode(requMap.get("password")));
 		user.setStatus("true");
 		user.setRole("user");
 		user.setProfile("default.png");
