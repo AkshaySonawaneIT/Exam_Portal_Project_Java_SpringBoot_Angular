@@ -7,27 +7,27 @@ import { AuthServiceService } from 'src/app/services/auth-service/auth-service.s
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnInit {
 
   isLoggedIn = false;
   username = null;
 
-  constructor(public service : AuthServiceService, private router : Router){}
+  constructor(public service: AuthServiceService, private router: Router) { }
 
-  ngOnInit(): void{
-    this.isLoggedIn = this.service.isLoggedIn();
-    this.username = this.service.getUserDetails().name.split(' ')[0];
-    this.service.loginStatusSubject.asObservable().subscribe(data=>{
+  ngOnInit(): void {
+    // this.isLoggedIn = this.service.isLoggedIn();
+    // this.username = this.service.getUserDetails().name.split(' ')[0];
+    this.service.loginStatusSubject.asObservable().subscribe(data => {
       this.isLoggedIn = this.service.isLoggedIn();
-    this.username = this.service.getUserDetails().name.split(' ')[0];
+      this.username = this.service.getUserDetails().name.split(' ')[0];
     })
   }
 
-  logout(){
+  logout() {
     this.service.logout();
-    // this.service.loginStatusSubject.next(false);
     this.router.navigate(['login']);
+    this.service.loginStatusSubject.next(false);
   }
-  
+
 
 }

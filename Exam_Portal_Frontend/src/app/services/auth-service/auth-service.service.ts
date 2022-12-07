@@ -51,6 +51,7 @@ export class AuthServiceService {
     if(userStr!=null){
       return JSON.parse(userStr);
     }
+    return null;
   }
 
   // Check user is logged in
