@@ -10,7 +10,7 @@
     <a *ngIf = "!isLoggedIn" routerLink="/register" mat-icon-button class="example-icon mr50" aria-label="Example icon-button with share icon">
         <span>Register</span>
     </a>
-    <a *ngIf = "isLoggedIn" mat-icon-button class="example-icon mr50" aria-label="Example icon-button with heart icon">
+    <a *ngIf = "isLoggedIn" routerLink="/admin-dashboard/profile" mat-icon-button class="example-icon mr50" aria-label="Example icon-button with heart icon">
         <span>{{ username }}</span>
     </a>
     <a *ngIf = "isLoggedIn" (click)="logout()" mat-icon-button class="example-icon mr50" aria-label="Example icon-button with heart icon">

@@ -1,0 +1,48 @@
+<mat-card class="text-center">
+    <mat-card-content>
+        <div class="bootstrap-wrapper">
+            <div class="container">
+                <div class="conatiner text-center">
+                    <img src="https://thumbs.dreamstime.com/b/default-profile-picture-avatar-photo-placeholder-vector-illustration-default-profile-picture-avatar-photo-placeholder-vector-189495158.jpg"
+                        class="profile-image" />
+                    <h1><b>{{ user.name }}</b></h1>
+                </div>
+                <div class="row">
+                    <div class="col-md-10 offset-md-1">
+                        <!-- Table Details -->
+                        <table class="table text-center">
+                            <tr>
+                                <td>Id</td>
+                                <td>{{ user.id }}</td>
+                            </tr>
+                            <tr>
+                                <td>Name</td>
+                                <td>{{ user.name }}</td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                            <tr>
+                                <td>Contact Number</td>
+                                <td>{{ user.contactNumber }}</td>
+                            </tr>
+                            <tr>
+                                <td>Role</td>
+                                <td>{{ user.role | uppercase }}</td>
+                            </tr>
+                            <tr>
+                                <td>Status</td>
+                                <td>{{ user.status | uppercase }}</td>
+                            </tr>
+                            <tr>
+                                <td><button mat-raised-button color="primary">UPDATE</button></td>
+                                <td><button mat-raised-button color="accent">SHARE</button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>
