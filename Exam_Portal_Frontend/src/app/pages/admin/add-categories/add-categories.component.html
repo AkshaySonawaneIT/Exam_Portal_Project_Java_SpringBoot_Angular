@@ -1,0 +1,33 @@
+<mat-card>
+    <mat-action-list>
+        <mat-card-header class="mb-20">
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Add Category</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content class="text-center mt-20">
+            <form [formGroup]="categoryForm" (ngSubmit)="addCategory()">
+
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Category Title</mat-label>
+                    <input formControlName="title" matInput placeholder="Enter Category Title..." required>
+                    <mat-hint></mat-hint>
+                </mat-form-field>
+
+
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Category Description</mat-label>
+                    <textarea formControlName="description" type="text" matInput
+                        placeholder="Enter Category Description..." required></textarea>
+                    <mat-hint></mat-hint>
+                </mat-form-field>
+
+            </form>
+        </mat-card-content>
+    </mat-action-list>
+
+    <div class="container text-center mt-20 mb-20">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!categoryForm.valid" (click)="addCategory()">Add Category</button>
+        <button type="button" mat-raised-button color="accent" class="btn" (click)="onClickReset()">Clear</button>
+    </div>
+</mat-card>
