@@ -75,7 +75,7 @@ public class QuizServiceImpl implements QuizService {
 		quiz.setDescription(requestMap.get("description"));
 		quiz.setNoofquestions(requestMap.get("noofquestions"));
 		quiz.setMaxmarks(requestMap.get("maxmarks"));
-		quiz.setActive("true");
+		quiz.setActive(requestMap.get("active"));
 		quiz.setCategory(category);
 		return quiz;
 	}
@@ -115,7 +115,12 @@ public class QuizServiceImpl implements QuizService {
 	@Override
 	public ResponseEntity<List<Quiz>> getAllQuiz() {
 		try {
-			return new ResponseEntity<>(quizDao.getAllQuiz(), HttpStatus.OK);
+			if(jwtFilter.isAdmin()) {
+				return new ResponseEntity<>(quizDao.getAllQuizAdmin(), HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<>(quizDao.getAllQuiz(), HttpStatus.OK);
+			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();

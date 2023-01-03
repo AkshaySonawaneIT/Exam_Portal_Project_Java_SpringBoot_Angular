@@ -8,22 +8,46 @@ import Swal from 'sweetalert2';
   styleUrls: ['./view-quizzes.component.css']
 })
 export class ViewQuizzesComponent implements OnInit {
-  
-  constructor(public service : QuizService){}
 
-  quiz:any = []
-  
+  constructor(public service: QuizService) { }
+
+  quiz: any = []
+
   ngOnInit(): void {
-      this.service.getQuizService().subscribe((data:any)=>{
-        console.log("Quiz Get Data Success : ");
-        console.log(data);
-        this.quiz = data;
-      },
-      (msg)=>{
+    this.service.getQuizService().subscribe((data: any) => {
+      console.log("Quiz Get Data Success : ");
+      console.log(data);
+      this.quiz = data;
+    },
+      (msg) => {
         console.log("Quiz get Error : ");
         console.log(msg);
-        Swal.fire("Error in loading categories");
+        Swal.fire("Error in loading quizzes");
       })
+  }
+
+  deleteQuiz(q:any){
+
+    Swal.fire({
+      icon: 'info',
+      title: 'Are you sure ?',
+      confirmButtonText: 'Delete',
+      showCancelButton: true,
+    }).then((result)=>{
+      if(result.isConfirmed){
+        console.log(q)
+        this.service.deleteQuizService(q).subscribe((data:any)=>{
+          console.log(data);
+          location.reload();
+        },
+        (error:any)=>{
+          console.log(error);
+        })
+      }
+    })
+
+
+    
   }
 
 }

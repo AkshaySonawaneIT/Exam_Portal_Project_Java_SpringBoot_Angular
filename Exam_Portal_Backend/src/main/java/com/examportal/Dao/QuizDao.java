@@ -11,6 +11,7 @@ import com.examportal.POJO.exam.Quiz;
 
 public interface QuizDao extends JpaRepository<Quiz, Long>{
 	List<Quiz> getAllQuiz();
+	List<Quiz> getAllQuizAdmin();
 	List<Quiz> getQuizId(Long id);
 	
 	@Modifying

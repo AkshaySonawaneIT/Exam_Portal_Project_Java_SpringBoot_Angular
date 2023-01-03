@@ -8,19 +8,19 @@ import Swal from 'sweetalert2';
   templateUrl: './view-categories.component.html',
   styleUrls: ['./view-categories.component.css']
 })
-export class ViewCategoriesComponent implements OnInit{
+export class ViewCategoriesComponent implements OnInit {
 
-  constructor(public service : CategoryServiceService){}
+  constructor(public service: CategoryServiceService) { }
 
-  categories:any = [{}];
+  categories: any = [{}];
 
   ngOnInit(): void {
-      this.service.getCategory().subscribe((data:any)=>{
-        console.log(data);
-        //console.log(data[0].cid);
-        this.categories = data;
-      },
-      (msg:any)=>{
+    this.service.getCategory().subscribe((data: any) => {
+      console.log(data);
+      //console.log(data[0].cid);
+      this.categories = data;
+    },
+      (msg: any) => {
         console.log(msg);
         Swal.fire("Error in loading categories");
       })

@@ -19,6 +19,7 @@ import org.hibernate.annotations.NamedQuery;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @NamedQuery(name = "Quiz.getAllQuiz", query = "select q from Quiz q where q.active='true'")
+@NamedQuery(name = "Quiz.getAllQuizAdmin", query = "select q from Quiz q")
 @NamedQuery(name = "Quiz.getQuizId", query = "select q from Quiz q where q.active='true' and q.id=:id")
 @NamedQuery(name = "Quiz.updateQuizStatus", query = "update Quiz q set q.active='false' where q.id=:id")
 @Entity
@@ -99,7 +100,7 @@ public class Quiz {
 		this.noofquestions = noofquestions;
 	}
 
-	public String isActive() {
+	public String getisActive() {
 		return active;
 	}
 

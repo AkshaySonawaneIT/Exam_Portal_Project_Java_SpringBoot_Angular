@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CategoryServiceService } from 'src/app/services/category-services/category-service.service';
 import { QuizService } from 'src/app/services/quiz-service/quiz.service';
 import Swal from 'sweetalert2';
 
@@ -11,16 +12,30 @@ import Swal from 'sweetalert2';
 })
 export class AddQuizzesComponent implements OnInit{
 
-  constructor(private service: QuizService, private snack: MatSnackBar) { }
+  constructor(private service: QuizService, private snack: MatSnackBar, public categoryService: CategoryServiceService) { }
 
-  ngOnInit(): void { }
+  categories: any = [{}];
+
+  ngOnInit(): void {
+    this.categoryService.getCategory().subscribe((data: any) => {
+      console.log(data);
+      //console.log(data[0].cid);
+      this.categories = data;
+    },
+      (msg: any) => {
+        console.log(msg);
+        Swal.fire("Error in loading categories");
+      })
+   }
 
 
   quizForm = new FormGroup({
+    category_cid : new FormControl(""),
     title: new FormControl("", [Validators.required]),
     description: new FormControl("", [Validators.required]),
     noofquestions: new FormControl("", [Validators.required]),
     maxmarks: new FormControl("", [Validators.required]),
+    active: new FormControl("false")
   });
 
 

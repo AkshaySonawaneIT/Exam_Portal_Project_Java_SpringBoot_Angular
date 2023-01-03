@@ -31,6 +31,8 @@ import { ViewCategoriesComponent } from './pages/admin/view-categories/view-cate
 import { AddCategoriesComponent } from './pages/admin/add-categories/add-categories.component';
 import { ViewQuizzesComponent } from './pages/admin/view-quizzes/view-quizzes.component';
 import { AddQuizzesComponent } from './pages/admin/add-quizzes/add-quizzes.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,9 @@ import { AddQuizzesComponent } from './pages/admin/add-quizzes/add-quizzes.compo
     MatToolbarModule,
     MatIconModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatSlideToggleModule,
+    MatSelectModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
