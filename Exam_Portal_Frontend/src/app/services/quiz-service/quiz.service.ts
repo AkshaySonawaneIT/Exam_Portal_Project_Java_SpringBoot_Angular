@@ -24,4 +24,14 @@ export class QuizService {
     console.log(quiz)
     return this.http.post(`${baseUrl}/quiz/deleteQuiz/${quiz.qid}`, quiz.qid);
   }
+
+  // Get Quiz By Id
+  public getQuizByIdService(quizId:any){
+    return this.http.get(`${baseUrl}/quiz/getQuiz/${quizId}`, quizId);
+  }
+
+  // Update Quiz
+  public updateQuizService(quiz:any){
+    return this.http.post(`${baseUrl}/quiz/updateQuiz`, quiz);
+  }
 }

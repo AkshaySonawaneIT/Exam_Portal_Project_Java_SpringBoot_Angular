@@ -22,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @NamedQuery(name = "Quiz.getAllQuizAdmin", query = "select q from Quiz q")
 @NamedQuery(name = "Quiz.getQuizId", query = "select q from Quiz q where q.active='true' and q.id=:id")
 @NamedQuery(name = "Quiz.updateQuizStatus", query = "update Quiz q set q.active='false' where q.id=:id")
+@NamedQuery(name = "Quiz.getQuizIdAdmin", query = "select q from Quiz q where q.id=:id")
 @Entity
 @Table(name = "quiz")
 public class Quiz {

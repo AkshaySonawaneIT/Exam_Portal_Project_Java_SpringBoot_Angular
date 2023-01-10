@@ -76,4 +76,15 @@ public class QuestionRestImpl implements QuestionRest {
 				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@Override
+	public ResponseEntity<List<Question>> getQuizQuestions(Long id) {
+		try {
+			return service.getQuizQuestions(id);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<List<Question>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
 }

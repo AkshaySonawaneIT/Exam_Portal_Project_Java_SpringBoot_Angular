@@ -14,4 +14,5 @@ public interface QuestionService {
 	public ResponseEntity<List<Question>> getAllQuestion();
 	public ResponseEntity<List<Question>> getQuestionById(Long id);
 	public ResponseEntity<String> deleteQuestion(Long id);
+	public ResponseEntity<List<Question>> getQuizQuestions(Long id);
 }

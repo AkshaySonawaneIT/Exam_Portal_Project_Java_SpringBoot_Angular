@@ -5,7 +5,10 @@ import { UserGuard } from './guard/user.guard';
 import { AddCategoriesComponent } from './pages/admin/add-categories/add-categories.component';
 import { AddQuizzesComponent } from './pages/admin/add-quizzes/add-quizzes.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { UpdateCategoryComponent } from './pages/admin/update-category/update-category.component';
+import { UpdateQuizComponent } from './pages/admin/update-quiz/update-quiz.component';
 import { ViewCategoriesComponent } from './pages/admin/view-categories/view-categories.component';
+import { ViewQuestionsComponent } from './pages/admin/view-questions/view-questions.component';
 import { ViewQuizzesComponent } from './pages/admin/view-quizzes/view-quizzes.component';
 import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -58,6 +61,18 @@ const routes: Routes = [
       {
         path: 'addQuiz',
         component: AddQuizzesComponent
+      },
+      {
+        path: 'quiz/:qid',
+        component: UpdateQuizComponent
+      },
+      {
+        path:'category/:cid',
+        component: UpdateCategoryComponent
+      },
+      {
+        path: 'questions/:qid/:title',
+        component: ViewQuestionsComponent
       }
     ]
   },

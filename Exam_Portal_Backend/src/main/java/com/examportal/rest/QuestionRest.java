@@ -31,4 +31,7 @@ public interface QuestionRest {
 
 	@PostMapping(path = "/deleteQuestion/{id}")
 	public ResponseEntity<String> deleteQuestion(@PathVariable Long id);
+	
+	@GetMapping(path = "/getQuizQuestions/{id}")
+	public ResponseEntity<List<Question>> getQuizQuestions(@PathVariable Long id);
 }

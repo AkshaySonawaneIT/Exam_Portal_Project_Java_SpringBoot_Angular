@@ -2,11 +2,12 @@
     <mat-action-list>
         <mat-card-header class="mb-20">
             <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Add Quiz</mat-card-title>
+            <mat-card-title>Update Quiz</mat-card-title>
         </mat-card-header>
         <mat-divider></mat-divider>
         <mat-card-content class="text-center mt-20">
-            <form [formGroup]="quizForm" (ngSubmit)="addQuiz()">
+
+            <form [formGroup]="quizForm" (ngSubmit)="updateQuiz()">
 
                 <mat-form-field class="full-width" appearance="fill">
                     <mat-label>Quiz Title</mat-label>
@@ -14,10 +15,9 @@
                     <mat-hint></mat-hint>
                 </mat-form-field>
 
-
                 <mat-form-field class="full-width" appearance="fill">
                     <mat-label>Quiz Description</mat-label>
-                    <textarea formControlName="description" type="text" matInput
+                    <textarea type="text" matInput formControlName="description"
                         placeholder="Enter Category Description..." required></textarea>
                     <mat-hint></mat-hint>
                 </mat-form-field>
@@ -51,24 +51,22 @@
                             </mat-select>
                         </mat-form-field>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2 full-width">
                         <mat-label>Quiz Status</mat-label>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4 full-width">
                         <mat-select formControlName="active">
                             <mat-option value="true">Active</mat-option>
                             <mat-option value="false">Inactive</mat-option>
                         </mat-select>
                     </div>
                 </div>
-
             </form>
         </mat-card-content>
     </mat-action-list>
 
     <div class="container text-center mt-20 mb-20">
-        <button type="submit" mat-raised-button color="primary" [disabled]="!quizForm.valid" (click)="addQuiz()">Add
+        <button type="submit" mat-raised-button color="primary" (click)="updateQuiz()">Update
             Quiz</button>
-        <button type="button" mat-raised-button color="accent" class="btn" (click)="onClickReset()">Clear</button>
     </div>
 </mat-card>

@@ -31,11 +31,10 @@ public class QuizServiceImpl implements QuizService {
 	public ResponseEntity<String> addQuiz(Map<String, String> requestMap) {
 		try {
 			if (jwtFilter.isAdmin()) {
-				if(validateQuizMap(requestMap, false)) {
+				if (validateQuizMap(requestMap, false)) {
 					quizDao.save(getQuizFromMap(requestMap, false));
 					return ExamPortalUtils.getResponseEntity("Quiz added successfully", HttpStatus.OK);
-				}
-				else {
+				} else {
 					return ExamPortalUtils.getResponseEntity(ExamPortalConstants.INVALID_DATA, HttpStatus.BAD_REQUEST);
 				}
 			} else {
@@ -67,9 +66,9 @@ public class QuizServiceImpl implements QuizService {
 		System.out.println("Inside getQuizFromMap");
 		Quiz quiz = new Quiz();
 		Category category = new Category();
-		category.setCid((long)Integer.parseInt(requestMap.get("category_cid")));
-		if(isAdd) {
-			quiz.setQid((long)Integer.parseInt(requestMap.get("qid")));
+		category.setCid((long) Integer.parseInt(requestMap.get("category_cid")));
+		if (isAdd) {
+			quiz.setQid((long) Integer.parseInt(requestMap.get("qid")));
 		}
 		quiz.setTitle(requestMap.get("title"));
 		quiz.setDescription(requestMap.get("description"));
@@ -84,28 +83,24 @@ public class QuizServiceImpl implements QuizService {
 	public ResponseEntity<String> updateQuiz(Map<String, String> requestMap) {
 		System.out.println("Inside updateQuiz ServiceImpl");
 		try {
-			if(jwtFilter.isAdmin()) {
-				if(validateQuizMap(requestMap, true)) {
-					Optional optional = quizDao.findById((long)Integer.parseInt(requestMap.get("qid")));
-					if(!optional.isEmpty()) {
+			if (jwtFilter.isAdmin()) {
+				if (validateQuizMap(requestMap, true)) {
+					Optional optional = quizDao.findById((long) Integer.parseInt(requestMap.get("qid")));
+					if (!optional.isEmpty()) {
 						Quiz quiz = getQuizFromMap(requestMap, true);
 						quizDao.save(quiz);
 						return ExamPortalUtils.getResponseEntity("Quiz updated successfully...", HttpStatus.OK);
-					}
-					else {
+					} else {
 						return ExamPortalUtils.getResponseEntity("Quiz id not found...", HttpStatus.OK);
 					}
-				}
-				else {
+				} else {
 					return ExamPortalUtils.getResponseEntity(ExamPortalConstants.INVALID_DATA, HttpStatus.BAD_REQUEST);
 				}
-			}
-			else {
+			} else {
 				return ExamPortalUtils.getResponseEntity(ExamPortalConstants.UNAUTHORIZED_ACCESS,
 						HttpStatus.UNAUTHORIZED);
 			}
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ExamPortalUtils.getResponseEntity(ExamPortalConstants.SOMETHING_WENT_WRONG,
@@ -115,14 +110,12 @@ public class QuizServiceImpl implements QuizService {
 	@Override
 	public ResponseEntity<List<Quiz>> getAllQuiz() {
 		try {
-			if(jwtFilter.isAdmin()) {
+			if (jwtFilter.isAdmin()) {
 				return new ResponseEntity<>(quizDao.getAllQuizAdmin(), HttpStatus.OK);
-			}
-			else {
+			} else {
 				return new ResponseEntity<>(quizDao.getAllQuiz(), HttpStatus.OK);
 			}
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return new ResponseEntity<List<Quiz>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -131,9 +124,13 @@ public class QuizServiceImpl implements QuizService {
 	@Override
 	public ResponseEntity<List<Quiz>> getQuizById(Long id) {
 		try {
-			return new ResponseEntity<>(quizDao.getQuizId(id), HttpStatus.OK);
-		}
-		catch(Exception e) {
+			if (jwtFilter.isAdmin()) {
+				return new ResponseEntity<>(quizDao.getQuizIdAdmin(id), HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(quizDao.getQuizId(id), HttpStatus.OK);
+			}
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return new ResponseEntity<List<Quiz>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -142,25 +139,24 @@ public class QuizServiceImpl implements QuizService {
 	@Override
 	public ResponseEntity<String> deleteQuiz(Long id) {
 		try {
-			if(jwtFilter.isAdmin()) {
+			if (jwtFilter.isAdmin()) {
 				Optional<Quiz> optional = quizDao.findById(id);
-				if(!optional.isEmpty()) {
+				if (!optional.isEmpty()) {
 					quizDao.updateQuizStatus(id);// Delete operation problem
 //					System.out.println(optional);
 					return ExamPortalUtils.getResponseEntity("Quiz deleted successfully....", HttpStatus.OK);
-				}
-				else {
+				} else {
 					return ExamPortalUtils.getResponseEntity("Quiz id not found....", HttpStatus.OK);
 				}
+			} else {
+				return ExamPortalUtils.getResponseEntity(ExamPortalConstants.UNAUTHORIZED_ACCESS,
+						HttpStatus.UNAUTHORIZED);
 			}
-			else {
-				return ExamPortalUtils.getResponseEntity(ExamPortalConstants.UNAUTHORIZED_ACCESS, HttpStatus.UNAUTHORIZED);
-			}
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return ExamPortalUtils.getResponseEntity(ExamPortalConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+		return ExamPortalUtils.getResponseEntity(ExamPortalConstants.SOMETHING_WENT_WRONG,
+				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
+
 }

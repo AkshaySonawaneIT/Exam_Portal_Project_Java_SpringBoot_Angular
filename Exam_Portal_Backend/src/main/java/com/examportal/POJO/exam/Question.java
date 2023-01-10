@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NamedQuery;
 
 @NamedQuery(name = "Question.getAllQuestion", query = "select q from Question q where q.status='true'")
+@NamedQuery(name = "Question.getAllQuizQuestions", query = "select q from Question q where q.status='true' and q.quiz.qid=:id")
+@NamedQuery(name = "Question.getAllQuizQuestionsAdmin", query = "select q from Question q where q.quiz.qid=:id")
 @NamedQuery(name = "Question.getQuestionById", query = "select q from Question q where q.id=:id and q.status='true'")
 @NamedQuery(name = "Question.updateQuestionStatus", query = "update Question q set q.status='false' where q.qestid=:id")
 @Entity

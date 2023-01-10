@@ -25,4 +25,25 @@ export class ViewCategoriesComponent implements OnInit {
         Swal.fire("Error in loading categories");
       })
   }
+
+  deleteCategory(category:any){
+    console.log(category);
+    Swal.fire({
+      icon: 'info',
+      title: 'Are you sure ?',
+      confirmButtonText: 'Delete',
+      showCancelButton: true,
+    }).then((result)=>{
+      if(result.isConfirmed){
+        console.log(category)
+        this.service.deleteCategoryService(category).subscribe((data:any)=>{
+          console.log(data);
+          location.reload();
+        },
+        (error:any)=>{
+          console.log(error);
+        })
+      }
+    })
+  }
 }

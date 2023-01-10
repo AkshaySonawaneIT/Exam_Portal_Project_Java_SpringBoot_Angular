@@ -13,6 +13,7 @@ public interface QuizDao extends JpaRepository<Quiz, Long>{
 	List<Quiz> getAllQuiz();
 	List<Quiz> getAllQuizAdmin();
 	List<Quiz> getQuizId(Long id);
+	List<Quiz> getQuizIdAdmin(Long id);
 	
 	@Modifying
 	@Transactional

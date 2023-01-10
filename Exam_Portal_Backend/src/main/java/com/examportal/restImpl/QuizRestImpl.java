@@ -58,7 +58,7 @@ public class QuizRestImpl implements QuizRest {
 
 	@Override
 	public ResponseEntity<List<Quiz>> getQuizById(Long id) {
-		System.out.println("Inside Get All Quiz RestImpl");
+		System.out.println("Inside Get Quiz By Id RestImpl"+ id);
 		try {
 			return service.getQuizById(id);
 		} catch (Exception e) {

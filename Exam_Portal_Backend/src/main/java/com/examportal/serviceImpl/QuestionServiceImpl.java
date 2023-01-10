@@ -154,4 +154,20 @@ public class QuestionServiceImpl implements QuestionService {
 		return ExamPortalUtils.getResponseEntity(ExamPortalConstants.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@Override
+	public ResponseEntity<List<Question>> getQuizQuestions(Long id) {
+		try {
+			if(jwtFilter.isAdmin()) {
+				return new ResponseEntity<>(questionDao.getAllQuizQuestionsAdmin(id), HttpStatus.OK);
+			}
+			else {
+				return new ResponseEntity<>(questionDao.getAllQuizQuestions(id), HttpStatus.OK);
+			}
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return new ResponseEntity<List<Question>>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR); 
+	}
+
 }
