@@ -36,6 +36,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { UpdateQuizComponent } from './pages/admin/update-quiz/update-quiz.component';
 import { UpdateCategoryComponent } from './pages/admin/update-category/update-category.component';
 import { ViewQuestionsComponent } from './pages/admin/view-questions/view-questions.component';
+import { AddQuestionComponent } from './pages/admin/add-question/add-question.component';
+import { UpdateQuestionComponent } from './pages/admin/update-question/update-question.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,9 @@ import { ViewQuestionsComponent } from './pages/admin/view-questions/view-questi
     AddQuizzesComponent,
     UpdateQuizComponent,
     UpdateCategoryComponent,
-    ViewQuestionsComponent
+    ViewQuestionsComponent,
+    AddQuestionComponent,
+    UpdateQuestionComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +80,8 @@ import { ViewQuestionsComponent } from './pages/admin/view-questions/view-questi
     MatListModule,
     MatTableModule,
     MatSlideToggleModule,
-    MatSelectModule
+    MatSelectModule,
+    CKEditorModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

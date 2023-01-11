@@ -78,7 +78,7 @@ public class QuestionServiceImpl implements QuestionService {
 		question.setOption3(requestMap.get("option3"));
 		question.setOption4(requestMap.get("option4"));
 		question.setAnswer(requestMap.get("answer"));
-		question.setStatus("true");
+		question.setStatus(requestMap.get("status"));
 		question.setQuiz(quiz);
 		return question;
 	}

@@ -3,9 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminGuard } from './guard/admin.guard';
 import { UserGuard } from './guard/user.guard';
 import { AddCategoriesComponent } from './pages/admin/add-categories/add-categories.component';
+import { AddQuestionComponent } from './pages/admin/add-question/add-question.component';
 import { AddQuizzesComponent } from './pages/admin/add-quizzes/add-quizzes.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { UpdateCategoryComponent } from './pages/admin/update-category/update-category.component';
+import { UpdateQuestionComponent } from './pages/admin/update-question/update-question.component';
 import { UpdateQuizComponent } from './pages/admin/update-quiz/update-quiz.component';
 import { ViewCategoriesComponent } from './pages/admin/view-categories/view-categories.component';
 import { ViewQuestionsComponent } from './pages/admin/view-questions/view-questions.component';
@@ -73,6 +75,14 @@ const routes: Routes = [
       {
         path: 'questions/:qid/:title',
         component: ViewQuestionsComponent
+      },
+      {
+        path: 'add-question/:qid',
+        component: AddQuestionComponent
+      },
+      {
+        path: 'update-question/:qid/:questid',
+        component: UpdateQuestionComponent
       }
     ]
   },

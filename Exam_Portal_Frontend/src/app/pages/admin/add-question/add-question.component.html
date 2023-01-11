@@ -1,0 +1,81 @@
+<mat-card>
+    <mat-action-list>
+        <mat-card-header class="mb-20">
+            <div mat-card-avatar class="example-header-image"></div>
+            <mat-card-title>Add Question</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content class="text-center mt-20">
+            <form [formGroup]="questionForm" (ngSubmit)="addQuestion()">
+                
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>Question</mat-label>
+                    <textarea formControlName="question" matInput placeholder="Enter Category Title..." required></textarea>
+                    <mat-hint></mat-hint>
+                </mat-form-field>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="full-width" appearance="fill">
+                            <mat-label>Option 1</mat-label>
+                            <input formControlName="option1" matInput placeholder="Enter Number of Questions..."
+                                required>
+                            <mat-hint></mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="full-width" appearance="fill">
+                            <mat-label>Option 2</mat-label>
+                            <input formControlName="option2" matInput placeholder="Enter Total Marks..." required>
+                            <mat-hint></mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="full-width" appearance="fill">
+                            <mat-label>Option 3</mat-label>
+                            <input formControlName="option3" matInput placeholder="Enter Number of Questions..."
+                                required>
+                            <mat-hint></mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-6">
+                        <mat-form-field class="full-width" appearance="fill">
+                            <mat-label>Option 4</mat-label>
+                            <input formControlName="option4" matInput placeholder="Enter Total Marks..." required>
+                            <mat-hint></mat-hint>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <mat-form-field class="full-width" appearance="fill">
+                            <mat-label>Answer</mat-label>
+                            <input formControlName="answer" matInput placeholder="Enter Total Marks..." required>
+                            <mat-hint></mat-hint>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-label>Question Status</mat-label>
+                    </div>
+                    <div class="col-md-3">
+                        <mat-select formControlName="status">
+                            <mat-option value="true">Active</mat-option>
+                            <mat-option value="false">Inactive</mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+
+            </form>
+        </mat-card-content>
+    </mat-action-list>
+
+    <div class="container text-center mt-20 mb-20">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!questionForm.valid" (click)="addQuestion()">Add
+            Quiz</button>
+        <button type="button" mat-raised-button color="accent" class="btn" (click)="onClickReset()">Clear</button>
+    </div>
+</mat-card>
